@@ -30,6 +30,7 @@ if nargin == 3
     app.ax.Color = [0.9375, 0.9375, 0.3375];
     ph = patch(app.ax,[0, 0, 0, 0], [0, 0, 1, 1], [0.6745, 1, 0.8045]);
 end
+
 Nsub = length(fileList);
 for subNum = 1:size(fileList, 1)
     fprintf('..')

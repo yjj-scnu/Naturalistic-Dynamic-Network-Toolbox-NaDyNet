@@ -1,5 +1,5 @@
 function ISCAP(inputDir, prefix, grayMatterMask, savedDir, params, app)
-%function ISCAP(inputDir,prefix, grayMatterMask, savedDir, params, app)
+%FORMAT ISCAP(inputDir,prefix, grayMatterMask, savedDir, params, app)
 %ISCAP evaluate intersubject coactivation pattern analysis (ISCAP) among
 % one group of subjects.This is an improved approach based on co-activation
 % pattern analysis (CAP), which can accomplish a higher spatiotemporal
@@ -13,7 +13,7 @@ function ISCAP(inputDir, prefix, grayMatterMask, savedDir, params, app)
 % prefix            - a String whose contents are decided by the target
 %                     subdirectorys in inputdir
 % grayMatterMask    - the address of the gray matter mask file
-% savedDir          - Path for saved, optional argument
+% savedDir          - Path for saved
 %
 % params            - a structure containing relevant parameters of ISCAP
 %   The elements in the structure are:
@@ -45,10 +45,10 @@ function ISCAP(inputDir, prefix, grayMatterMask, savedDir, params, app)
 
 
 %% parameters  Editing of all the CAP generation parameters
-params.Pp = str2double(params.Pp);
-params.Pn = str2double(params.Pn);
-params.Tmot = str2double(params.Tmot);
-params.K = str2double(params.K);
+% params.Pp = str2double(params.Pp);
+% params.Pn = str2double(params.Pn);
+% params.Tmot = str2double(params.Tmot);
+% params.K = str2double(params.K);
 
 if params.K > 12 || params.K < 0
     error("The range of k should be within (0, 12].")
