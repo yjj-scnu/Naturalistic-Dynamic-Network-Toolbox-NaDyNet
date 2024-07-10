@@ -43,7 +43,7 @@ for i=1:nDim1
             if MaskData(i,j,k) && sum(squeeze(Cov5DVolume(i,j,k,:)))
                 DependentVariable=squeeze(AllVolume(i,j,k,:));
                 ImgCovTemp = squeeze(Cov5DVolume(i,j,k,:));
-                ImgCovTemp = (ImgCovTemp-repmat(mean(ImgCovTemp),size(ImgCovTemp,1),1));%%Demean.
+                ImgCovTemp = (ImgCovTemp - repmat(mean(ImgCovTemp),size(ImgCovTemp,1),1));%%Demean.
                 ImgCovTemp=[ones(size(ImgCovTemp,1),1),ImgCovTemp];
                 [b,r] = y_regress_ss(DependentVariable,ImgCovTemp);
                 VolumeAfterRemoveCov(i,j,k,:)=DependentVariable-r;
