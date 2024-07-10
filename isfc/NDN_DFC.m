@@ -3,8 +3,8 @@ clc
 rootdir='E:\yjj\scnu_work\matlab_APP\data\sfc\data\ROI_mat\raw';
 
 methodType = 'SWISFC';% Valid values are "SWFC" or "SWISFC".
-% ISA_type (str): The type of intersubject analysis. Valid values are "LOO_regress" or "LOO".
-ISA_type = 'LOO';
+% ISA_type (str): The type of intersubject analysis. Valid values are "regressLOO" or "LOO".
+ISA_type = 'regressLOO';
 %         load data （nt *  nr * nsub）
 data=read_2Dmat_2_3DmatrixROITC(rootdir);
 N_sub = size(data, 3);
@@ -24,17 +24,17 @@ for s=1:N_sub
 
     if isequal(methodType, 'SWISFC')
         %% isxxx
-
+        % leave one out
+        LOO = data;
+        LOO(:,:,s)=[];
+        fprintf('SWISFC for sub %s\n', num2str(s));
         if ~exist("ISA_type","var")
             error("Argument ISA_type should not be empty, it must be assgind ")
         end
         if isequal(ISA_type, "LOO") % LOO
-
-            subR=data;
-            subR(:,:,s)=[];
-            subtc2=[subtc,squeeze(mean(subR,3))];
+            subtc2=[subtc,squeeze(mean(LOO,3))];
             subtc2Z=zscore(subtc2);
-            fprintf('SWISFC for sub %s\n', num2str(s));
+
             [Ct2]=pp_ReHo_dALFF_dFC_gift(subtc2Z, method, TR, wsize);%trme * ROI paris, 2D. r*(r-1)/2
 
             n = size(subtc2Z, 2);
@@ -52,7 +52,10 @@ for s=1:N_sub
             end
 
         else % LOO_regress
-            error("暂时没有开发出来")
+            LOO_mean = mean(LOO,3);
+            subDataAfterRemoveCov = NDN_regressLOO(subtc, LOO_mean);
+            subtcZ=zscore(subDataAfterRemoveCov);
+            [tmp_dFC_DCCX]=pp_ReHo_dALFF_dFC_gift(subtcZ,method,TR,wsize);%trme * ROI paris, 2D. r*(r-1)/2
         end
 
 
@@ -72,3 +75,7 @@ for s=1:N_sub
     dFC_result=[dFC_result;tmp_CT2];
 
 end%s
+
+cd(savedDirdir)
+save('SP.mat','SP','-v7.3')
+save('dFC_result.mat','dFC_result','-v7.3')
