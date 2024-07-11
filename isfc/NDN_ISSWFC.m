@@ -1,6 +1,6 @@
 function dFC_result = NDN_ISSWFC(inputdir, savedDir, params, app)
 %FORMAT NDN_ISSWFC(inputdir, savedDir, params, app)
-%NDN_SWISFC  calculates the sliding-window-based dynamic functional
+%NDN_ISSWFC calculates the sliding-window-based dynamic functional
 % connectivity for a group of subjects. This study used a Gaussian tapered
 % window by convolving a rectangle with a Gaussian kernel (σ=3).To increase
 % the estimation accuracy, L1 regularization was adopted. The free
@@ -12,16 +12,19 @@ function dFC_result = NDN_ISSWFC(inputdir, savedDir, params, app)
 %INPUT:
 % inputdir          - Path of nSubjects' 2D ROI timecourse mat/txt file(nT * nR)
 % savedDir          - Path for saved
-% params            - a structure containing relevant parameters of ISSWFC
-%   methodType      - Valid values are "SWFC" or "ISSWFC". ISSWFC is an
+% params            - A structure containing relevant parameters of ISSWFC
+%   methodType      - Valid values are 'SWFC' or 'ISSWFC'. ISSWFC is an
 %                     improved approach which can accomplish a higher
-%                     spatiotemporal consistency.
-%   ISA_type        - Valid values are "regressLOO" or "LOO". The type of
+%                     spatiotemporal consistency.When selecting the
+%                     original version, the ISA-type value does not need to
+%                     be specified
+%                     
+%   ISA_type        - Valid values are 'regressLOO' or 'LOO'. The type of
 %                     intersubject analysis. 
 %   wsize           - The size of the sliding-window
 %   TR              - represent the time repitition of the current group. 
 %                   
-% app               - a optional argument, is a uiobject              
+% app               - A optional argument, is a uiobject              
 
 
 if ~isfield(params, "methodType")
@@ -135,11 +138,11 @@ end%s
 
 cd(savedDir)
 if exist("ISA_type","var")
-    save([ISA_type '_SP.mat'], 'SP', '-v7.3')
-    save([ISA_type '_dFC_result.mat'], 'dFC_result', '-v7.3')
+    save([methodType '_' ISA_type '_SP.mat'], 'SP', '-v7.3')
+    save([methodType '_' ISA_type '_dFC_result.mat'], 'dFC_result', '-v7.3')
 else
-    save('SP.mat','SP','-v7.3')
-    save('dFC_result.mat','dFC_result','-v7.3')
+    save([methodType '_SP.mat'], 'SP', '-v7.3')
+    save([methodType '_dFC_result.mat'], 'dFC_result', '-v7.3')
 end
 
 
