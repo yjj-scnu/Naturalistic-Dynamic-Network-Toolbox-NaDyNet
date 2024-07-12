@@ -1,6 +1,10 @@
 function dFC_result = NDN_ISMTD(inputdir, savedDir, params, app)
 %FORMAT NDN_ISMTD(inputdir, savedDir, params, app)
-%NDN_ISMTD 此处显示有关此函数的摘要
+%MTD generate the products of first-order temporal derivatives for two
+% univariate time series divided by products of the standard deviations
+% of the two univariate time series. And ISMTD is an improved version of
+% MTD. It perfrom a higher spatiotemporal consistency
+% 
 %
 %INPUT:
 % inputdir          - Path of nSubjects' 2D ROI timecourse mat/txt file(nT * nR)
@@ -84,7 +88,7 @@ for s=1:N_sub
             LOO_mean = mean(LOO,3);
             subDataAfterRemoveCov = NDN_regressLOO(subtc, LOO_mean);
             subtcZ=zscore(subDataAfterRemoveCov);
-            Ct2 = coupling(subtcZ,MTDwsize);
+            Ct2 = coupling(subtcZ, MTDwsize);
             % extract the upper right ISDCC values
             % moving average DCC with window length
             atmp = zeros(size(Ct2,1),size(Ct2,1));
@@ -99,7 +103,7 @@ for s=1:N_sub
         subtcZ=zscore(subtc);%time * ROI
         fprintf('MTD for sub %s\n', num2str(s));
 
-        Ct2 = coupling(subtcZ,MTDwsize);
+        Ct2 = coupling(subtcZ, MTDwsize);
         % extract the upper right ISDCC values
         % moving average DCC with window length
         atmp = zeros(size(Ct2,1),size(Ct2,1));
