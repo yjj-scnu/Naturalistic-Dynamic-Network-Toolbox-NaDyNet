@@ -122,5 +122,6 @@ for subNum = 1:length(sublist)
     end
 
 end
+yjj_batch_generate_3dnii_2_tif(savedDir)
 disp('Done !')
 end

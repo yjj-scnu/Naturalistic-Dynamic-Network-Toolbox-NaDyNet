@@ -8,7 +8,7 @@ function write_3DmatrixROITC_2_2Dmat(ROI_TC, saveDir, sublist, postfix)
 % sublist     - a struct(nSub * 1), whose 'name' field serves as the part of name
 % of the 2D result file.
 % postfix     - a string that will serve as a suffix to the file name
-% e.g. if postfix='raw', the 2D result will be sub001_raw.mat, sub002_raw.mat...
+% e.g. if postfix ='raw', the 2D result will be sub001_raw.mat, sub002_raw.mat...
 
 nSub = size(ROI_TC, 3);
 if ~exist(saveDir)
@@ -16,6 +16,8 @@ if ~exist(saveDir)
 end
 for i = 1:nSub
     temp = squeeze(ROI_TC(:,:,i));
-    saveName = fullfile(saveDir, [sublist(i).name '_' postfix '.mat']);
+    [~, name, ~] = fileparts(sublist(i).name);
+
+    saveName = fullfile(saveDir, [name '_' postfix '.mat']);
     save(saveName, "temp", "-V7.3")
 end

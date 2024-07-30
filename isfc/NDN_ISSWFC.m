@@ -56,6 +56,8 @@ end
 if ~exist("savedDir", "dir")
     mkdir(savedDir)
 end
+cd(inputdir)
+fileList = dir('*.mat');
 
 % load data （nt *  nr * nsub）
 data=read_2Dmat_2_3DmatrixROITC(inputdir);
@@ -137,12 +139,32 @@ for s=1:N_sub
 end%s
 
 cd(savedDir)
+% transform dFC_result's shape 
+% from [N_time*N_sub, size(dFC_result, 2)] ===> [N_time, size(dFC_result, 2), N_sub]
+dFC_result1 = reshape(dFC_result, [size(dFC_result, 1) / N_sub, N_sub, size(dFC_result, 2)]);
+dFC_result2 = zeros(size(dFC_result, 1) / N_sub, size(dFC_result, 2), N_sub);
+for i = 1:size(dFC_result, 1) / N_sub
+    dFC_result2(i, :, :) = squeeze(dFC_result1(i, :, :))';
+end
+
+res.SP = SP;
+res.dFC_result = dFC_result;
+res.method = methodType;
+res.TR = params.TR;
+res.N_sub = N_sub;
+res.N_roi = N_roi;
+if exist("ISA_type", "var")
+    res.ISA_type = ISA_type;
+end
 if exist("ISA_type","var")
-    save([methodType '_' ISA_type '_SP.mat'], 'SP', '-v7.3')
-    save([methodType '_' ISA_type '_dFC_result.mat'], 'dFC_result', '-v7.3')
+    write_3DmatrixROITC_2_2Dmat(dFC_result2, savedDir, fileList, [methodType '_' ISA_type])
+    save([methodType '_' ISA_type '_all.mat'], 'res', '-v7.3')
+
+
 else
-    save([methodType '_SP.mat'], 'SP', '-v7.3')
-    save([methodType '_dFC_result.mat'], 'dFC_result', '-v7.3')
+    write_3DmatrixROITC_2_2Dmat(dFC_result2, savedDir, fileList, methodType)
+    save([methodType '_all.mat'], 'res', '-v7.3')
+
 end
 
 
