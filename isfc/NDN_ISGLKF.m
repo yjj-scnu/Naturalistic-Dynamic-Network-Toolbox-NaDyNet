@@ -59,7 +59,7 @@ if ~isfield(params, "TR")
 end
 cd(inputdir)
 fileList = dir('*.mat');
-%（nt *  nr * nsub）
+%（nt *  nr * nsub�?
 data=read_2Dmat_2_3DmatrixROITC(inputdir);
 N_sub = size(data, 3);
 N_time = size(data, 1);
@@ -84,7 +84,7 @@ for s=1:N_sub
         LOO(:,:,s)=[];
         fprintf('ISGLKF for sub %s\n', num2str(s));
 
-        if isequal(ISA_type, "LOO")
+        if isequal(ISA_type,  'LOO')
 
             subtc2=[subtc,squeeze(mean(LOO,3))];
 
@@ -104,7 +104,7 @@ for s=1:N_sub
                 tmp_dFC_DCCX(iw,:)=mat2vec_Asym(tmpr);
             end
         end
-        if isequal(ISA_type, "regressLOO")
+        if isequal(ISA_type, 'regressLOO')
             LOO_mean = mean(LOO,3);
             subDataAfterRemoveCov = NDN_regressLOO(subtc, LOO_mean);
             subtcZ=zscore(subDataAfterRemoveCov);

@@ -29,8 +29,8 @@ app.UIAxes.Title.String = "State Transition";
 
 
 for i = 1:K
-app.(['State' num2str(i) 'Label']).FontColor = custom_cm(i, :);
-app.(['State' num2str(i) 'Label']).Visible = 'on';
+    app.(['State' num2str(i) 'Label']).FontColor = custom_cm(i, :);
+    app.(['State' num2str(i) 'Label']).Visible = 'on';
 end
 
 %% plotting states

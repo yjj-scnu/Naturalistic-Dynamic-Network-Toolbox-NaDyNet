@@ -22,6 +22,7 @@ for f=1:length(niiList)
     niifile=[inputDir filesep niiList(f).name];
     picname=[inputDir filesep niiList(f).name(1:end-4) '.tif'];
     Yuan_BrainNet_MapCfg(surfile, cfgfile, niifile, picname);
+    close(gcf)
 end
 
 end

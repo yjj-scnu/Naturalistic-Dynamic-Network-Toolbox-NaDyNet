@@ -75,7 +75,7 @@ for s=1:N_sub
         LOO(:,:,s)=[];
         fprintf('ISMTD for sub %s\n', num2str(s));
 
-        if isequal(ISA_type, "LOO")
+        if isequal(ISA_type,  'LOO')
 
             subtc2=[subtc,squeeze(mean(LOO,3))];
             subtc2Z=zscore(subtc2);
@@ -90,7 +90,7 @@ for s=1:N_sub
                 tmp_dFC_DCCX(iw,:)=mat2vec_Asym(tmpr);
             end
         end
-        if isequal(ISA_type, "regressLOO")
+        if isequal(ISA_type,  'regressLOO')
             LOO_mean = mean(LOO,3);
             subDataAfterRemoveCov = NDN_regressLOO(subtc, LOO_mean);
             subtcZ=zscore(subDataAfterRemoveCov);
