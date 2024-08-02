@@ -24,6 +24,9 @@ maxIndex = min(K, app.curPage * 4);
 count = 1;
 for i=minIndex : maxIndex
     % 关闭4个状态的UIAxes对象的坐标轴
+    app.(['UIAxes2_' num2str(count)]).XColor = 'none';
+    app.(['UIAxes2_' num2str(count)]).YColor = 'none';
+
     ii = sprintf('%02d', i);
     app.(['UIAxes2_' num2str(count)]).Visible = "on";
     tmp_state = squeeze(allState(:, :, i));
