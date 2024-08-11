@@ -22,7 +22,5 @@ b = zeros(ncolX,1);
 b(perm) = R \ (Q'*y);
 yhat = X*b;                     % Predicted responses at each data point.
 r = y-yhat;                     % Residuals.
-
-
 end
 
