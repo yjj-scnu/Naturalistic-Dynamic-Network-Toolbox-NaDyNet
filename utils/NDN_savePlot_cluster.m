@@ -17,9 +17,9 @@ colors = [
     34, 137, 139; % 中间颜色2
     254, 255, 13; % 结束颜色
     ] / 255;
-% 定义渐变的位置
+% 定义渐变的位�?
 positions = [ 0, 1/2, 1];
-% 生成渐变色
+% 生成渐变�?
 gradientColors = interp1(positions, colors, linspace(0, 1, 1000));
 %% save stateTransition
 imagesc(stateTransition);
@@ -29,7 +29,7 @@ set(gca, 'FontName','Arial','FontSize',25,'LineWidth', 1.5);
 xlim([0 nT])
 xlabel(gca,'Time [s]','FontSize',36);
 ylabel(gca,'Subjects','FontSize',36);
-clim([1,K + 1]);
+caxis([1,K + 1]);
 set(gcf,'Position',[100 100 1920*0.6 1080*0.4]);
 
 span = floor((nT / 4));
@@ -57,7 +57,7 @@ for i=1:K
     imagesc(tmp_state)
     colormap(gradientColors)
     colorbar
-    clim([min(tmp_state(:)), max(tmp_state(:))])
+    caxis([min(tmp_state(:)), max(tmp_state(:))])
     title(['state0' num2str(i)])
 
     nROI = size(tmp_state, 1);
