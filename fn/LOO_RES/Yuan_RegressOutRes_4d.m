@@ -58,8 +58,8 @@ VolumeAfterRemoveCov(isnan(VolumeAfterRemoveCov))=0;
 VolumeResting(isnan(VolumeResting))=0;
 
 
-VolumeAfterRemoveCov = VolumeAfterRemoveCov + repmat(MeanBrain,[1,1,1,nDim4]); %%Add the mean back.
-VolumeResting = VolumeResting + repmat(MeanBrain,[1,1,1,nDim4]); %%Add the mean back.
+% VolumeAfterRemoveCov = VolumeAfterRemoveCov + repmat(MeanBrain,[1,1,1,nDim4]); %%Add the mean back.
+% VolumeResting = VolumeResting + repmat(MeanBrain,[1,1,1,nDim4]); %%Add the mean back.
 
 taskSaveDir = [DataDir filesep 'LOO_ResReg' filesep 'Task'];
 restingSaveDir = [DataDir filesep 'LOO_ResReg' filesep 'Resting'];
