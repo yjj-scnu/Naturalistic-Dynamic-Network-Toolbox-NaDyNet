@@ -26,7 +26,7 @@ end
 
 subDataAfterRemoveCov(isnan(subDataAfterRemoveCov))=0;
 
-subDataAfterRemoveCov = subDataAfterRemoveCov + repmat(MeanBrain,[nTime, 1]); %%Add the mean back.
+% subDataAfterRemoveCov = subDataAfterRemoveCov + repmat(MeanBrain,[nTime, 1]); %%Add the mean back.
 
 
 end

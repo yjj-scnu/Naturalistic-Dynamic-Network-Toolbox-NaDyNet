@@ -8,7 +8,7 @@ function [b,r] = NDN_regress_ss(y,X)
 %   b - beta of regression model.
 %   r - residual.
 %
-% reference: 
+% Reference: 
 % y_regress_ss(y,X,Contrast,TF_Flag) Written by YAN Chao-Gan
 [n,ncolX] = size(X);
 [Q,R,perm] = qr(X,0);
